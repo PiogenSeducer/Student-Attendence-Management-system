@@ -1,0 +1,187 @@
+:root {
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
+  --green: #16a34a;
+  --red: #dc2626;
+  --amber: #f59e0b;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.app { width: min(1100px, 94%); margin: 0 auto; padding: 2rem 0 3rem; }
+
+button, input, select { font: inherit; }
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid #a5b4fc;
+  outline-offset: 2px;
+}
+
+/* Header */
+.top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+h1 { font-size: 1.9rem; font-weight: 700; }
+.sub { color: var(--muted); font-size: 1.05rem; }
+.link-btn { background: none; border: none; color: var(--primary); cursor: pointer; font-size: 0.9rem; margin-left: 0.5rem; }
+.link-btn:hover { text-decoration: underline; }
+.export { display: flex; gap: 0.75rem; }
+.export select {
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.2rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn.primary { background: var(--primary); color: #fff; }
+.btn.primary:hover { background: var(--primary-dark); }
+.btn.ghost { background: var(--card); border-color: var(--border); color: var(--text); }
+.btn.ghost:hover { background: #f3f4f6; }
+
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+.stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.3rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.stat-label { color: var(--muted); font-size: 0.95rem; }
+.stat-value { font-size: 2rem; font-weight: 700; }
+.stat-value.green { color: var(--green); }
+.stat-value.red { color: var(--red); }
+.icon { width: 52px; height: 52px; border-radius: 10px; display: grid; place-items: center; }
+.icon.indigo { background: #eef2ff; color: var(--primary); }
+.icon.blue { background: #e0ecff; color: #2563eb; }
+.icon.green-bg { background: #dcfce7; color: var(--green); }
+.icon.red-bg { background: #fee2e2; color: var(--red); }
+
+/* Cards */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+.card h2 { font-size: 1.4rem; font-weight: 700; }
+.muted { color: var(--muted); margin: 0.3rem 0 1.3rem; }
+
+/* Forms */
+.add-form { display: flex; gap: 1rem; align-items: flex-end; flex-wrap: wrap; }
+.field { display: flex; flex-direction: column; gap: 0.3rem; }
+.field.small { width: 160px; }
+.field.grow { flex: 1; min-width: 200px; }
+label { font-size: 0.85rem; font-weight: 600; color: var(--muted); }
+input[type="text"], input[type="date"] {
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+}
+.error { color: var(--red); font-size: 0.9rem; min-height: 1.3rem; margin-top: 0.4rem; }
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 0.8rem 0 1rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+.toolbar-btns { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+/* Mark list */
+.mark-list { display: grid; gap: 0.6rem; }
+.mark-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.mark-info { display: flex; gap: 1rem; align-items: center; min-width: 0; }
+.roll { color: var(--muted); font-weight: 600; min-width: 56px; }
+.student-name { font-weight: 500; overflow-wrap: anywhere; }
+.toggle { display: flex; gap: 0.4rem; }
+.toggle button {
+  padding: 0.4rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--muted);
+}
+.toggle .p.active { background: var(--green); border-color: var(--green); color: #fff; }
+.toggle .a.active { background: var(--red); border-color: var(--red); color: #fff; }
+
+/* Table */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 720px; }
+th, td { padding: 1rem 0.9rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { color: var(--muted); font-weight: 500; }
+tbody tr:last-child td { border-bottom: none; }
+.num { text-align: center; }
+.center { text-align: center; }
+.present { color: var(--green); }
+.absent { color: var(--red); }
+.pct { font-weight: 600; }
+.pct.good { color: var(--primary); }
+.pct.warn { color: var(--amber); }
+.pct.low { color: var(--red); }
+.pct.none { color: var(--muted); }
+
+.badge { display: inline-block; padding: 0.2rem 0.8rem; border-radius: 4px; font-size: 0.85rem; font-weight: 700; }
+.badge.good { background: #22c55e; color: #fff; }
+.badge.warn { background: #facc15; color: #422006; }
+.badge.low { background: #ef4444; color: #fff; }
+.badge.none { background: #e5e7eb; color: #4b5563; }
+
+.remove-btn { background: none; border: none; color: var(--red); cursor: pointer; font-weight: 600; }
+.remove-btn:hover { text-decoration: underline; }
+
+.empty { text-align: center; padding: 2rem 0 0.5rem; color: var(--muted); }
+.empty .btn { margin-top: 0.8rem; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .stats { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .stats { grid-template-columns: 1fr; }
+  .card { padding: 1.2rem; }
+  .mark-row { flex-direction: column; align-items: flex-start; }
+  .field.small { width: 100%; }
+  .add-form .btn { width: 100%; justify-content: center; }
+  h1 { font-size: 1.5rem; }
+}

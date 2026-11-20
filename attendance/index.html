@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Attendance Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- Header -->
+    <header class="top">
+      <div>
+        <h1>Attendance Overview</h1>
+        <p class="sub">
+          <span id="className">Class 12-A</span> • <span id="studentCount">0 Students</span>
+          <button id="editClass" class="link-btn" type="button">Edit class</button>
+        </p>
+      </div>
+      <div class="export">
+        <select id="format" aria-label="Report format">
+          <option value="csv">CSV</option>
+          <option value="json">JSON</option>
+        </select>
+        <button id="download" class="btn primary" type="button">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          Download Report
+        </button>
+      </div>
+    </header>
+
+    <!-- Stat cards -->
+    <section class="stats">
+      <div class="stat">
+        <div><p class="stat-label">Total Students</p><p class="stat-value" id="statTotal">0</p></div>
+        <div class="icon indigo"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      </div>
+      <div class="stat">
+        <div><p class="stat-label">Class Average</p><p class="stat-value" id="statAvg">0.0%</p></div>
+        <div class="icon blue"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+      </div>
+      <div class="stat">
+        <div><p class="stat-label">Good Attendance</p><p class="stat-value green" id="statGood">0</p></div>
+        <div class="icon green-bg"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg></div>
+      </div>
+      <div class="stat">
+        <div><p class="stat-label">Low Attendance</p><p class="stat-value red" id="statLow">0</p></div>
+        <div class="icon red-bg"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></div>
+      </div>
+    </section>
+
+    <!-- Mark attendance -->
+    <section class="card">
+      <h2>Mark Attendance</h2>
+      <p class="muted">Pick a date, then mark each student present or absent. Changes save automatically.</p>
+
+      <form id="addForm" class="add-form" novalidate>
+        <div class="field small">
+          <label for="rollInput">Roll no (optional)</label>
+          <input id="rollInput" type="text" placeholder="e.g. s008" maxlength="12" autocomplete="off">
+        </div>
+        <div class="field grow">
+          <label for="nameInput">Student name</label>
+          <input id="nameInput" type="text" placeholder="Enter full name" maxlength="40" autocomplete="off">
+        </div>
+        <button class="btn primary" type="submit">Add student</button>
+      </form>
+      <p class="error" id="addError" role="alert"></p>
+
+      <div class="toolbar">
+        <div class="field">
+          <label for="dateInput">Date</label>
+          <input id="dateInput" type="date">
+        </div>
+        <div class="toolbar-btns">
+          <button id="allPresent" class="btn ghost" type="button">Mark all present</button>
+          <button id="allAbsent" class="btn ghost" type="button">Mark all absent</button>
+        </div>
+      </div>
+
+      <div id="markList" class="mark-list"></div>
+    </section>
+
+    <!-- Summary -->
+    <section class="card">
+      <h2>Student Attendance Summary</h2>
+      <p class="muted">Overall attendance percentage for each student. Students below 75% are marked as low attendance.</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Roll No</th>
+              <th>Student Name</th>
+              <th class="num">Present Days</th>
+              <th class="num">Absent Days</th>
+              <th class="num">Total Days</th>
+              <th class="num">Attendance %</th>
+              <th class="center">Status</th>
+              <th class="center">Remove</th>
+            </tr>
+          </thead>
+          <tbody id="summaryBody"></tbody>
+        </table>
+      </div>
+      <div id="emptyState" class="empty" hidden>
+        <p>No students yet. Add a student above to get started.</p>
+        <button id="loadSample" class="btn ghost" type="button">Load sample data</button>
+      </div>
+    </section>
+
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
